@@ -14,6 +14,17 @@ class ThemeState extends Equatable{
   List<Object> get props =>[brightness];
 }
 
+class ThemeCubit extends Cubit<ThemeState> {
+  ThemeCubit():super(ThemeState(Brightness.light));
+
+  void ThemeChange () {
+    emit(state.brightness == Brightness.light?
+    ThemeState(Brightness.dark)
+    :ThemeState(Brightness.light
+    ));
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
