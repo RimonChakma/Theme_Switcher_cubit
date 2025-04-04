@@ -31,10 +31,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ThemeSwitcherScreen(),
-    );
+    return BlocProvider(create: (context) => ThemeCubit(),
+      child: BlocBuilder <ThemeCubit,ThemeState>  (builder: (context, state) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: ThemeSwitcherScreen(),
+        theme: ThemeData(
+          brightness: state.brightness
+        ),
+      );
+    },),);
   }
 }
 
@@ -50,7 +56,12 @@ class _ThemeSwitcherScreenState extends State<ThemeSwitcherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Theme Change"),centerTitle: true,),
-      body: Center(child: Text("Theme"),),
-    );
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              context.read<ThemeCubit>().ThemeChange();
+            }, child: Text("change saves")
+        ),
+      ),);
   }
 }
