@@ -1,8 +1,19 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main () {
   runApp(MyApp());
 }
+
+class ThemeState extends Equatable{
+  final Brightness brightness;
+  const ThemeState(this.brightness);
+
+  @override
+  List<Object> get props =>[brightness];
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
